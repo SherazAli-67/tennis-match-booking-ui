@@ -25,7 +25,18 @@ GoRouter router = GoRouter(
               routes: [
                 GoRoute(
                   path: 'availability',
-                  builder: (ctx, state) => const AvailabilityScreen(),
+                  pageBuilder: (ctx, state) => CustomTransitionPage(
+                    key: state.pageKey,
+                    child: const AvailabilityScreen(),
+                    transitionDuration: const Duration(milliseconds: 350),
+                    reverseTransitionDuration: const Duration(milliseconds: 350),
+                    transitionsBuilder: (context, animation, secondaryAnimation, child) => SlideTransition(
+                      position: Tween(begin: const Offset(1, 0), end: Offset.zero).animate(
+                        CurvedAnimation(parent: animation, curve: Curves.easeOutCubic),
+                      ),
+                      child: child,
+                    ),
+                  ),
                 ),
               ],
             ),

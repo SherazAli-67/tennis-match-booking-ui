@@ -10,6 +10,8 @@ import 'package:tennis_match_booking/core/models/availability_match.dart';
 import 'package:tennis_match_booking/core/models/calendar_day.dart';
 import 'package:tennis_match_booking/core/models/match_player.dart';
 import 'package:tennis_match_booking/presentation/widgets/app_button.dart';
+import 'package:tennis_match_booking/presentation/widgets/fade_slide_in.dart';
+import 'package:tennis_match_booking/presentation/widgets/scale_tap.dart';
 
 class AvailabilityScreen extends StatefulWidget {
   const AvailabilityScreen({super.key});
@@ -43,15 +45,18 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
             child: Column(
               spacing: 15,
               children: [
-                _buildHeader(),
+                FadeSlideIn(child: _buildHeader()),
                 Expanded(
                   child: ListView(
                     padding: .only(top: 14),
                     children: [
-                      _buildWeekCard(),
+                      FadeSlideIn(delay: const Duration(milliseconds: 500), child: _buildWeekCard()),
                       const SizedBox(height: 14),
                       for (var i = 0; i < AppData.availabilityMatches.length; i++) ...[
-                        _buildMatchCard(match: AppData.availabilityMatches[i]),
+                        FadeSlideIn(
+                          delay: Duration(milliseconds: 160 + (80 * i)),
+                          child: _buildMatchCard(match: AppData.availabilityMatches[i]),
+                        ),
                         if (i != AppData.availabilityMatches.length - 1) const SizedBox(height: 14),
                       ],
                     ],
@@ -69,7 +74,7 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
     return Row(
       children: [
         GestureDetector(
-          onTap: ()=> Navigator.pop(context),
+          onTap: () => context.pop(),
           child: _buildCircleIconWidget(iconData: Icons.arrow_back_rounded),
         ),
         Expanded(child: Text(StringConst.availability, style: AppTextStyles.title.copyWith(fontSize: 24),  textAlign: .center)),
@@ -143,19 +148,18 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
         spacing: 12,
         children: [
           Text(day.weekday, style: AppTextStyles.caption.copyWith(fontSize: 16,),),
-          Container(
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeOut,
             width: 38,
             height: 38,
             alignment: .center,
             decoration: BoxDecoration(
               color: isSelected ? AppColors.primaryGreenColor.withValues(alpha: 0.41) : Colors.white,
               shape: .circle,
-              border: .all(color: isSelected ? AppColors.primaryGreenColor : Colors.transparent)
+              border: .all(color: isSelected ? AppColors.primaryGreenColor : Colors.transparent),
             ),
-            child: Text(
-              '${day.day}',
-              style: AppTextStyles.caption.copyWith(color: AppColors.textGreyColor)
-            ),
+            child: Text('${day.day}', style: AppTextStyles.caption.copyWith(color: AppColors.textGreyColor)),
           ),
         ],
       ),
@@ -176,14 +180,22 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
             spacing: 10,
             children: [
               SvgPicture.asset(AppIcons.icCalendar, width: 24, height: 24, colorFilter: .mode(AppColors.primaryGreenColor, .srcIn)),
-              RichText(text: TextSpan(
-                text: 'Thursday ',
-                style: AppTextStyles.title,
-                children: [
-                  TextSpan(text: "(9 Jan )", style: AppTextStyles.title.copyWith(fontWeight: .w400))
-                ]
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 250),
+                child: RichText(
+                  key: ValueKey(AppData.calendarDays[_selectedDayIndex].label),
+                  text: TextSpan(
+                    text: '${AppData.calendarDays[_selectedDayIndex].label.split(' (').first} ',
+                    style: AppTextStyles.title,
+                    children: [
+                      TextSpan(
+                        text: '(${AppData.calendarDays[_selectedDayIndex].label.split(' (').last}',
+                        style: AppTextStyles.title.copyWith(fontWeight: .w400),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              )
             ],
           ),
           Padding(
@@ -206,13 +218,18 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                               borderRadius: .circular(4),
                             ),
                           ),
-                          FractionallySizedBox(
-                            widthFactor: 0.65,
-                            child: Container(
-                              height: 4,
-                              decoration: BoxDecoration(
-                                color: AppColors.primaryGreenColor,
-                                borderRadius: .circular(4),
+                          LayoutBuilder(
+                            builder: (context, constraints) => Align(
+                              alignment: .centerLeft,
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeOutCubic,
+                                height: 4,
+                                width: constraints.maxWidth * (0.4 + (_selectedDayIndex * 0.08)).clamp(0.35, 0.92),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primaryGreenColor,
+                                  borderRadius: .circular(4),
+                                ),
                               ),
                             ),
                           ),
@@ -229,7 +246,9 @@ class _AvailabilityScreenState extends State<AvailabilityScreen> {
                       child: AppButton(label: StringConst.cancel, variant: .secondary, onPressed: () => context.pop()),
                     ),
                     Expanded(
-                      child: AppButton(label: StringConst.confirm, onPressed: () => context.pop()),
+                      child: ScaleTap(
+                        child: AppButton(label: StringConst.confirm, onPressed: () => context.pop()),
+                      ),
                     ),
                   ],
                 ),

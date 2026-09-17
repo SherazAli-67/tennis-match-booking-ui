@@ -8,6 +8,8 @@ import 'package:tennis_match_booking/core/app_icons.dart';
 import 'package:tennis_match_booking/core/app_textstyles.dart';
 import 'package:tennis_match_booking/core/models/upcoming_match.dart';
 import 'package:tennis_match_booking/presentation/widgets/app_chip.dart';
+import 'package:tennis_match_booking/presentation/widgets/fade_slide_in.dart';
+import 'package:tennis_match_booking/presentation/widgets/scale_tap.dart';
 import 'package:tennis_match_booking/router/router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,43 +45,52 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: .start,
               spacing: 32,
               children: [
-                _buildHeader(),
-                Column(
-                  crossAxisAlignment: .start,
-                  spacing: 16,
-                  children: [
-                    _buildSearchField(),
-                    _buildCategoryChips(),
-                  ],
+                FadeSlideIn(child: _buildHeader()),
+                FadeSlideIn(
+                  delay: const Duration(milliseconds: 80),
+                  child: Column(
+                    crossAxisAlignment: .start,
+                    spacing: 16,
+                    children: [
+                      _buildSearchField(),
+                      _buildCategoryChips(),
+                    ],
+                  ),
                 ),
                 Expanded(
                   child: Column(
                     spacing: 24,
                     children: [
-                      Row(
-                        children: [
-                          Expanded(child: Text(StringConst.upcomingGames, style: AppTextStyles.sectionTitle)),
-                          Container(
-                            decoration: BoxDecoration(
+                      FadeSlideIn(
+                        delay: const Duration(milliseconds: 160),
+                        child: Row(
+                          children: [
+                            Expanded(child: Text(StringConst.upcomingGames, style: AppTextStyles.sectionTitle)),
+                            Container(
+                              decoration: BoxDecoration(
                                 border: .all(color: AppColors.whiteColor),
                                 color: AppColors.surfaceColor,
-                                borderRadius: .circular(8.75)
+                                borderRadius: .circular(8.75),
+                              ),
+                              padding: .all(8.75),
+                              child: Text(StringConst.seeAll, style: AppTextStyles.caption.copyWith(color: AppColors.textMutedColor)),
                             ),
-                            padding: .all(8.75),
-                            child: Text(StringConst.seeAll, style: AppTextStyles.caption.copyWith(color: AppColors.textMutedColor)),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
                       Expanded(
                         child: ListView.separated(
                           itemCount: AppData.upcomingMatches.length,
                           separatorBuilder: (context, index) => const SizedBox(height: 24),
-                          itemBuilder: (context, index) => _buildMatchCard(match: AppData.upcomingMatches[index]),
+                          itemBuilder: (context, index) => FadeSlideIn(
+                            delay: Duration(milliseconds: 300 + (80 * index)),
+                            child: _buildMatchCard(match: AppData.upcomingMatches[index]),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -238,15 +249,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildBookButton({required String label}) {
-    return GestureDetector(
-      onTap: () => context.push(NamedRoutes.availability.routeName),
-      child: Container(
-        padding: .symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: AppColors.btnBgColor.withValues(alpha: 0.8),
-          borderRadius: .circular(17.49),
+    return ScaleTap(
+      child: GestureDetector(
+        onTap: () => context.push(NamedRoutes.availability.routeName),
+        child: Container(
+          padding: .symmetric(horizontal: 16, vertical: 8),
+          decoration: BoxDecoration(
+            color: AppColors.btnBgColor.withValues(alpha: 0.8),
+            borderRadius: .circular(17.49),
+          ),
+          child: Text(label, style: AppTextStyles.title.copyWith(color: Colors.white)),
         ),
-        child: Text(label, style: AppTextStyles.title.copyWith(color: Colors.white)),
       ),
     );
   }
