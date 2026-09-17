@@ -16,7 +16,13 @@ class StringConst {
   static const available = 'Available';
   static const full = 'Full';
   static const booked = 'Booked';
-  static const monthYear = 'October 2024';
+  static const completed = 'Completed';
+  static const thisWeek = 'This Week';
+  static const cancel = 'Cancel';
+  static const confirm = 'Confirm';
+  static const finalMatch = 'Final Match';
+  static const startTime = '8:00AM';
+  static const endTime = '4:00PM';
   static const comingSoon = 'Coming soon';
   static const calendar = 'Calendar';
   static const tournaments = 'Tournaments';

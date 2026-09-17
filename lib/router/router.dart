@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tennis_match_booking/constants/string_const.dart';
-import 'package:tennis_match_booking/core/app_textstyles.dart';
+import 'package:tennis_match_booking/presentation/screens/availability_screen.dart';
 import 'package:tennis_match_booking/presentation/screens/home_screen.dart';
 import 'package:tennis_match_booking/presentation/screens/main_shell_screen.dart';
 import 'package:tennis_match_booking/presentation/screens/placeholder_screen.dart';
@@ -25,9 +25,7 @@ GoRouter router = GoRouter(
               routes: [
                 GoRoute(
                   path: 'availability',
-                  builder: (ctx, state) => const Scaffold(
-                    body: Center(child: Text(StringConst.availability, style: AppTextStyles.title)),
-                  ),
+                  builder: (ctx, state) => const AvailabilityScreen(),
                 ),
               ],
             ),

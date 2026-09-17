@@ -30,13 +30,13 @@ class AppData {
   ];
 
   static const calendarDays = [
-    CalendarDay(weekday: 'M', day: 10),
-    CalendarDay(weekday: 'T', day: 11),
-    CalendarDay(weekday: 'W', day: 12),
-    CalendarDay(weekday: 'T', day: 13),
-    CalendarDay(weekday: 'F', day: 14),
-    CalendarDay(weekday: 'S', day: 15),
-    CalendarDay(weekday: 'S', day: 16),
+    CalendarDay(weekday: 'Sun', day: 5, label: 'Sunday (5 Jan)'),
+    CalendarDay(weekday: 'Mon', day: 6, label: 'Monday (6 Jan)'),
+    CalendarDay(weekday: 'Tue', day: 7, label: 'Tuesday (7 Jan)'),
+    CalendarDay(weekday: 'Wed', day: 8, label: 'Wednesday (8 Jan)'),
+    CalendarDay(weekday: 'Thu', day: 9, label: 'Thursday (9 Jan)'),
+    CalendarDay(weekday: 'Fri', day: 10, label: 'Friday (10 Jan)'),
+    CalendarDay(weekday: 'Sat', day: 11, label: 'Saturday (11 Jan)'),
   ];
 
   static const upcomingMatches = [
@@ -71,65 +71,42 @@ class AppData {
 
   static const availabilityMatches = [
     AvailabilityMatch(
-      title: "Women's Singles",
-      status: StringConst.available,
+      title: "Woman's Singles",
+      subtitle: StringConst.finalMatch,
+      status: StringConst.completed,
       players: [
         MatchPlayer(
-          name: 'Emma Wilson',
+          name: 'Coco Gauff',
           countryCode: 'US',
           avatarUrl: 'https://i.pravatar.cc/150?img=47',
+          setScores: [6, 4, 8],
         ),
         MatchPlayer(
-          name: 'Sofia Rossi',
-          countryCode: 'IT',
+          name: 'Elena Rybakina',
+          countryCode: 'KZ',
           avatarUrl: 'https://i.pravatar.cc/150?img=45',
+          setScores: [4, 8, 3],
         ),
       ],
-      scores: ['6', '4', '4', '3'],
     ),
     AvailabilityMatch(
-      title: "Men's Doubles",
-      status: StringConst.booked,
+      title: "Man's Singles",
+      subtitle: StringConst.finalMatch,
+      status: StringConst.completed,
       players: [
         MatchPlayer(
-          name: 'James Carter',
-          countryCode: 'GB',
-          avatarUrl: 'https://i.pravatar.cc/150?img=14',
+          name: 'Jannik Sinner',
+          countryCode: 'IT',
+          avatarUrl: 'https://i.pravatar.cc/150?img=12',
+          setScores: [6, 4, 8],
         ),
         MatchPlayer(
-          name: 'Lucas Martin',
-          countryCode: 'FR',
-          avatarUrl: 'https://i.pravatar.cc/150?img=15',
-        ),
-        MatchPlayer(
-          name: 'Noah Kim',
-          countryCode: 'KR',
-          avatarUrl: 'https://i.pravatar.cc/150?img=16',
-        ),
-        MatchPlayer(
-          name: 'Oliver Braun',
-          countryCode: 'DE',
-          avatarUrl: 'https://i.pravatar.cc/150?img=17',
-        ),
-      ],
-      scores: ['6', '3', '7', '5'],
-    ),
-    AvailabilityMatch(
-      title: 'Open Court',
-      status: StringConst.full,
-      players: [
-        MatchPlayer(
-          name: 'Ava Chen',
-          countryCode: 'CN',
-          avatarUrl: 'https://i.pravatar.cc/150?img=28',
-        ),
-        MatchPlayer(
-          name: 'Mia Lopez',
+          name: 'Carlos Alcaraz',
           countryCode: 'ES',
-          avatarUrl: 'https://i.pravatar.cc/150?img=29',
+          avatarUrl: 'https://i.pravatar.cc/150?img=14',
+          setScores: [4, 8, 3],
         ),
       ],
-      scores: ['6', '6', '2', '1'],
     ),
   ];
 }
