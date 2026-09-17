@@ -11,4 +11,5 @@ class AppIcons {
 
   static const femaleLeagueImg = 'assets/images/female_league_img.png';
   static const maleLeagueImg = 'assets/images/men_league_img.png';
+  static const devImg = 'assets/images/sherazali.jpeg';
 }

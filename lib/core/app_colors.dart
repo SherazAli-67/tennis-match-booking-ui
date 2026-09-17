@@ -15,4 +15,9 @@ class AppColors {
   static const statusActiveColor = Color(0xFF2E7D32);
   static const gradientColor1 = Color(0xff117946);
   static const screenGradientBgColor = Color(0xff61BA2A);
+  static const lightWhiteColor = Color(0xffF8F9F8);
+  static const matchCardSurfaceColor = Color(0xffF0F6F4);
+  static const greyColor = Color(0xff929090);
+  static const btnBgColor = Color(0xff1A6646);
+  static const fillGreyColor = Color(0xffAAAAAA);
 }

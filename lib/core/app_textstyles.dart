@@ -13,7 +13,7 @@ class AppTextStyles {
   static const sectionTitle = TextStyle(
     fontFamily: 'Inter',
     fontSize: 20,
-    fontWeight: .w700,
+    fontWeight: .w500,
     color: AppColors.textPrimaryColor,
   );
 
@@ -69,7 +69,7 @@ class AppTextStyles {
 
   static const price = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 22,
+    fontSize: 32,
     fontWeight: .w700,
     color: AppColors.textPrimaryColor,
   );

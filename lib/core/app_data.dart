@@ -9,8 +9,8 @@ import 'app_icons.dart';
 
 class AppData {
   static const currentUser = UserProfile(
-    name: 'Toma Shaha',
-    avatarUrl: 'https://i.pravatar.cc/150?img=47',
+    name: 'Sheraz Ali',
+    avatarUrl: AppIcons.devImg,
   );
 
   static const categories = [
@@ -18,6 +18,8 @@ class AppData {
     'Court',
     'Match',
     'Partner',
+    'Pickleball',
+    'Tennis'
   ];
 
   static const timeSlots = [
@@ -108,5 +110,16 @@ class AppData {
         ),
       ],
     ),
+  ];
+
+  static List<String> imageUrls = [
+    'https://images.unsplash.com/photo-1614204424926-196a80bf0be8?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cGVvcGxlfGVufDB8fDB8fHww',
+    'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cGVvcGxlfGVufDB8fDB8fHww',
+    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cGVvcGxlfGVufDB8fDB8fHww',
+    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fHBlb3BsZXxlbnwwfHwwfHx8MA%3D%3D',
+    'https://images.unsplash.com/photo-1602442787305-decbd65be507?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8d29tZW58ZW58MHx8MHx8fDA%3D',
+    'https://images.unsplash.com/photo-1690444963408-9573a17a8058?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHdvbWVufGVufDB8fDB8fHww',
+    'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHdvbWVufGVufDB8fDB8fHww'
   ];
 }

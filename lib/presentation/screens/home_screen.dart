@@ -8,7 +8,6 @@ import 'package:tennis_match_booking/core/app_icons.dart';
 import 'package:tennis_match_booking/core/app_textstyles.dart';
 import 'package:tennis_match_booking/core/models/upcoming_match.dart';
 import 'package:tennis_match_booking/presentation/widgets/app_chip.dart';
-import 'package:tennis_match_booking/presentation/widgets/avatar_stack.dart';
 import 'package:tennis_match_booking/router/router.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -38,37 +37,51 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: SafeArea(
           bottom: false,
-          child: Column(
-            crossAxisAlignment: .start,
-            spacing: 18,
-            children: [
-              Padding(
-                padding: .fromLTRB(20, 8, 20, 0),
-                child: _buildHeader(),
-              ),
-              Padding(
-                padding: .symmetric(horizontal: 20),
-                child: _buildSearchField(),
-              ),
-              _buildCategoryChips(),
-              Padding(
-                padding: .symmetric(horizontal: 20),
-                child: Row(
+          child: Padding(
+            padding: const .symmetric(horizontal: 21.0, vertical: 4),
+            child: Column(
+              crossAxisAlignment: .start,
+              spacing: 32,
+              children: [
+                _buildHeader(),
+                Column(
+                  crossAxisAlignment: .start,
+                  spacing: 16,
                   children: [
-                    Expanded(child: Text(StringConst.upcomingGames, style: AppTextStyles.sectionTitle)),
-                    Text(StringConst.seeAll, style: AppTextStyles.caption.copyWith(color: AppColors.textMutedColor)),
+                    _buildSearchField(),
+                    _buildCategoryChips(),
                   ],
                 ),
-              ),
-              Expanded(
-                child: ListView.separated(
-                  padding: .fromLTRB(20, 0, 20, 100),
-                  itemCount: AppData.upcomingMatches.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: 14),
-                  itemBuilder: (context, index) => _buildMatchCard(match: AppData.upcomingMatches[index]),
-                ),
-              ),
-            ],
+                Expanded(
+                  child: Column(
+                    spacing: 24,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(child: Text(StringConst.upcomingGames, style: AppTextStyles.sectionTitle)),
+                          Container(
+                            decoration: BoxDecoration(
+                                border: .all(color: AppColors.whiteColor),
+                                color: AppColors.surfaceColor,
+                                borderRadius: .circular(8.75)
+                            ),
+                            padding: .all(8.75),
+                            child: Text(StringConst.seeAll, style: AppTextStyles.caption.copyWith(color: AppColors.textMutedColor)),
+                          )
+                        ],
+                      ),
+                      Expanded(
+                        child: ListView.separated(
+                          itemCount: AppData.upcomingMatches.length,
+                          separatorBuilder: (context, index) => const SizedBox(height: 14),
+                          itemBuilder: (context, index) => _buildMatchCard(match: AppData.upcomingMatches[index]),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -82,13 +95,11 @@ class _HomeScreenState extends State<HomeScreen> {
         Container(
           width: 48,
           height: 48,
-          decoration: BoxDecoration(shape: .circle, color: AppColors.whiteColor),
+          decoration: BoxDecoration(shape: .circle, color: AppColors.whiteColor, border: .all(color: AppColors.statusActiveColor)),
           clipBehavior: .antiAlias,
-          child: Image.network(
-            AppData.currentUser.avatarUrl,
-            fit: .cover,
-            errorBuilder: (context, error, stackTrace) => ColoredBox(color: AppColors.chipInactiveColor),
-          ),
+          child: ClipOval(
+            child: Image.asset(AppData.currentUser.avatarUrl, fit: .cover,),
+          )
         ),
         Expanded(
           child: Column(
@@ -96,7 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
             spacing: 2,
             children: [
               Text(StringConst.goodMorning, style: AppTextStyles.greetingLabel),
-              Text('${AppData.currentUser.name} 👋', style: AppTextStyles.greeting),
+              Text('${AppData.currentUser.name} 🎾', style: AppTextStyles.greeting),
             ],
           ),
         ),
@@ -107,27 +118,28 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildIconButton({required String iconPath}) {
     return Container(
-      width: 44,
-      height: 44,
       alignment: .center,
-      decoration: BoxDecoration(color: AppColors.whiteColor, shape: .circle),
-      child: SvgPicture.asset(iconPath, width: 22, height: 22, colorFilter: .mode(AppColors.primaryGreenColor, .srcIn)),
+      padding: .all(10.93),
+      decoration: BoxDecoration(color: AppColors.lightWhiteColor, borderRadius: .circular(18)),
+      child: SvgPicture.asset(iconPath, width: 26, height: 26, colorFilter: .mode(AppColors.primaryGreenColor, .srcIn)),
     );
   }
 
   Widget _buildSearchField() {
     return Container(
-      padding: .symmetric(horizontal: 16, vertical: 14),
+      padding: .symmetric(horizontal: 24, vertical: 12),
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
-        borderRadius: .circular(28),
+        borderRadius: .circular(17.49),
+        border: .all(color: AppColors.primaryGreenColor.withValues(alpha: 0.22))
       ),
+      alignment: .center,
       child: Row(
         children: [
           Expanded(
             child: Text(StringConst.searchHint, style: AppTextStyles.body.copyWith(color: AppColors.textHintColor)),
           ),
-          SvgPicture.asset(AppIcons.icSearch, width: 20, height: 20, colorFilter: .mode(AppColors.textHintColor, .srcIn)),
+          SvgPicture.asset(AppIcons.icSearch, width: 18, height: 18, colorFilter: .mode(AppColors.textHintColor, .srcIn)),
         ],
       ),
     );
@@ -138,7 +150,6 @@ class _HomeScreenState extends State<HomeScreen> {
       height: 40,
       child: ListView.separated(
         scrollDirection: .horizontal,
-        padding: .symmetric(horizontal: 20),
         itemCount: AppData.categories.length,
         separatorBuilder: (context, index) => const SizedBox(width: 10),
         itemBuilder: (context, index) => AppChip(
@@ -152,58 +163,72 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildMatchCard({required UpcomingMatch match}) {
     return Container(
-      padding: .all(12),
+      padding: .symmetric(horizontal: 17.49, vertical: 18.79),
       decoration: BoxDecoration(
-        color: AppColors.whiteColor,
-        borderRadius: .circular(24),
+        color: AppColors.matchCardSurfaceColor,
+        borderRadius: .circular(32),
+        border: .all(color: AppColors.whiteColor, width: 2)
       ),
-      child: Row(
-        crossAxisAlignment: .start,
-        spacing: 12,
+      child: Column(
+        spacing: 16,
         children: [
-          ClipRRect(
-            borderRadius: .circular(18),
-            child: Image.asset(
-              match.imageUrl,
-              width: 155,
-              height: 155,
-              fit: .cover,
-              errorBuilder: (context, error, stackTrace) => ColoredBox(
-                color: AppColors.chipInactiveColor,
-                child: SizedBox(width: 92, height: 118),
+          Row(
+            crossAxisAlignment: .start,
+            spacing: 24,
+            children: [
+              ClipRRect(
+                borderRadius: .circular(26.24),
+                child: Image.asset(match.imageUrl, width: 155, height: 155, fit: .cover,),),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: .start,
+                  spacing: 27,
+                  children: [
+                    Column(
+                      children: [
+                        Text(match.title, style: AppTextStyles.title.copyWith(fontSize: 22, fontWeight: .w500)),
+                        Row(
+                          spacing: 4,
+                          children: [
+                            SvgPicture.asset(AppIcons.icLocation,),
+                            Expanded(child: Text(match.location, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.textMutedColor), overflow: .ellipsis)),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: .start,
+                      children: [
+                        Text(match.feeLabel, style: AppTextStyles.bodyMedium.copyWith(color: AppColors.greyColor)),
+                        Text(match.price, style: AppTextStyles.price),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: .start,
-              spacing: 4,
-              children: [
-                Text(match.title, style: AppTextStyles.title),
-                Row(
-                  spacing: 4,
-                  children: [
-                    SvgPicture.asset(AppIcons.icLocation, width: 12, height: 12, colorFilter: .mode(AppColors.textMutedColor, .srcIn)),
-                    Expanded(child: Text(match.location, style: AppTextStyles.caption, overflow: .ellipsis)),
-                  ],
+          Row(
+            children: [
+              Expanded(
+                child: Stack(
+                    alignment: .topLeft,
+                    children: List.generate(4, (index){
+                      String imageUrl = AppData.imageUrls[index];
+                      return  index == 0 ? _buildUserImageItemWidget(imageUrl) :  Positioned(
+                          left: index * 30,
+                          child: index == 3 ? _buildMoreWidget() : _buildUserImageItemWidget(imageUrl) );
+                    })
                 ),
-                Text(match.feeLabel, style: AppTextStyles.caption),
-                Row(
-                  children: [
-                    AvatarStack(imageUrls: match.playerAvatars, size: 24),
-                    const SizedBox(width: 4),
-                    Text('+${match.extraPlayerCount}', style: AppTextStyles.caption),
-                    const Spacer(),
-                    Text(match.price, style: AppTextStyles.price),
-                  ],
-                ),
-                Align(
-                  alignment: .centerRight,
-                  child: _buildBookButton(label: match.actionLabel),
-                ),
-              ],
-            ),
-          ),
+              ),
+              Align(
+                alignment: .centerRight,
+                child: _buildBookButton(label: match.actionLabel),
+              ),
+            ],
+          )
+
+
         ],
       ),
     );
@@ -215,11 +240,31 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         padding: .symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: AppColors.primaryGreenColor,
-          borderRadius: .circular(20),
+          color: AppColors.btnBgColor.withValues(alpha: 0.8),
+          borderRadius: .circular(17.49),
         ),
-        child: Text(label, style: AppTextStyles.button.copyWith(fontSize: 12)),
+        child: Text(label, style: AppTextStyles.title.copyWith(color: Colors.white)),
       ),
+    );
+  }
+
+  Widget _buildUserImageItemWidget(String imageUrl) => Container(
+      height: 41.55, width: 41.55,
+      decoration: BoxDecoration(
+          borderRadius: .circular(12.57),
+          border: .all(color: AppColors.whiteColor),
+      ),
+      child: ClipRRect(borderRadius: .circular(10),child: Image.network(imageUrl, fit: .cover,),));
+
+  Widget _buildMoreWidget() {
+    return Container(
+      decoration: BoxDecoration(
+        shape: .circle,
+        color: AppColors.fillGreyColor,
+        border: .all(color: Colors.white, width: 2)
+      ),
+      padding: .symmetric(horizontal: 12.27, vertical: 12.77),
+      child: Text("+5",style: AppTextStyles.loginHint.copyWith(color: Colors.white),),
     );
   }
 }
