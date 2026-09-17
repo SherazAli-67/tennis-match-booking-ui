@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tennis_match_booking/constants/string_const.dart';
+import 'package:tennis_match_booking/presentation/screens/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,11 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tennis Match Booking',
+      title: StringConst.appTitle,
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
+        brightness: .light
       ),
-      home: Scaffold(body: Center(child: Text("Match Booking app"),),)
+      home: WelcomeScreen()
     );
   }
 }
