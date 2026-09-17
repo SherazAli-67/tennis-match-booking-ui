@@ -19,15 +19,15 @@ class AppChip extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: .symmetric(horizontal: 16, vertical: 10),
+        padding: .symmetric(horizontal: 18, vertical: 8),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primaryGreenColor : AppColors.chipInactiveColor,
+          color: isSelected ? AppColors.primaryGreenColor : AppColors.whiteColor,
           borderRadius: .circular(24),
         ),
         child: Text(
           label,
           style: AppTextStyles.chip.copyWith(
-            color: isSelected ? AppColors.whiteColor : AppColors.textPrimaryColor,
+            color: isSelected ? AppColors.whiteColor : AppColors.textMutedColor,
           ),
         ),
       ),

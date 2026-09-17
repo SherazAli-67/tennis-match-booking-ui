@@ -7,4 +7,8 @@ class AppIcons {
   static const icTrophy = 'assets/icons/ic_trophy.svg';
   static const icUser = 'assets/icons/ic_user.svg';
   static const welcomeBgImg = 'assets/images/welcome_bg_img.png';
+
+
+  static const femaleLeagueImg = 'assets/images/female_league_img.png';
+  static const maleLeagueImg = 'assets/images/men_league_img.png';
 }

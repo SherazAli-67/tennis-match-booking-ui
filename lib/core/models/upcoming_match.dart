@@ -4,7 +4,9 @@ class UpcomingMatch {
     required this.price,
     required this.imageUrl,
     required this.playerAvatars,
-    required this.status,
+    required this.location,
+    required this.feeLabel,
+    required this.extraPlayerCount,
     required this.actionLabel,
   });
 
@@ -12,6 +14,8 @@ class UpcomingMatch {
   final String price;
   final String imageUrl;
   final List<String> playerAvatars;
-  final String status;
+  final String location;
+  final String feeLabel;
+  final int extraPlayerCount;
   final String actionLabel;
 }

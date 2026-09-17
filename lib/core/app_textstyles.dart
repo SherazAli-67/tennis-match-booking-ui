@@ -4,10 +4,10 @@ import 'package:tennis_match_booking/core/app_colors.dart';
 class AppTextStyles {
   static const headline = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: .w700,
     color: AppColors.whiteColor,
-    height: 1.2,
+    height: 1.15,
   );
 
   static const sectionTitle = TextStyle(
@@ -52,11 +52,33 @@ class AppTextStyles {
     color: AppColors.whiteColor,
   );
 
+  static const greetingLabel = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 11,
+    fontWeight: .w500,
+    color: AppColors.textMutedColor,
+    letterSpacing: 0.6,
+  );
+
   static const greeting = TextStyle(
     fontFamily: 'Inter',
-    fontSize: 18,
-    fontWeight: .w600,
+    fontSize: 16,
+    fontWeight: .w700,
     color: AppColors.textPrimaryColor,
+  );
+
+  static const price = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 22,
+    fontWeight: .w700,
+    color: AppColors.textPrimaryColor,
+  );
+
+  static const loginHint = TextStyle(
+    fontFamily: 'Inter',
+    fontSize: 13,
+    fontWeight: .w400,
+    color: AppColors.whiteColor,
   );
 
   static const chip = TextStyle(
