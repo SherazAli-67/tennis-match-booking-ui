@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tennis_match_booking/constants/string_const.dart';
-import 'package:tennis_match_booking/presentation/screens/welcome_screen.dart';
+import 'package:tennis_match_booking/router/router.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,12 +12,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: StringConst.appTitle,
       theme: ThemeData(
         brightness: .light
       ),
-      home: WelcomeScreen()
+      routerConfig: router,
+      builder: (ctx, child) => child!,
     );
   }
 }
