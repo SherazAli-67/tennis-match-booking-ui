@@ -21,12 +21,12 @@ class AppButton extends StatelessWidget {
     return switch (variant) {
       AppButtonVariant.circular => _buildCircularButton(),
       AppButtonVariant.secondary => _buildPillButton(
-          backgroundColor: AppColors.whiteColor,
+          backgroundColor: AppColors.greyBtnColor,
           foregroundColor: AppColors.primaryGreenColor,
-          borderColor: AppColors.primaryGreenColor,
+          borderColor: Colors.transparent,
         ),
       AppButtonVariant.primary => _buildPillButton(
-          backgroundColor: AppColors.primaryGreenColor,
+          backgroundColor: AppColors.primaryGreenDarkColor,
           foregroundColor: AppColors.whiteColor,
         ),
     };
@@ -39,10 +39,10 @@ class AppButton extends StatelessWidget {
   }) {
     return Material(
       color: backgroundColor,
-      borderRadius: .circular(28),
+      borderRadius: .circular(16),
       child: InkWell(
         onTap: onPressed,
-        borderRadius: .circular(28),
+        borderRadius: .circular(16),
         child: Container(
           padding: .symmetric(horizontal: 20, vertical: 12),
           decoration: BoxDecoration(
@@ -51,7 +51,7 @@ class AppButton extends StatelessWidget {
           ),
           child: Text(
             label,
-            style: AppTextStyles.button.copyWith(color: foregroundColor),
+            style: AppTextStyles.button.copyWith(color: foregroundColor, fontWeight: .w500),
             textAlign: .center,
           ),
         ),

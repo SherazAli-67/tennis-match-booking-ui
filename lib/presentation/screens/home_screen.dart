@@ -73,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Expanded(
                         child: ListView.separated(
                           itemCount: AppData.upcomingMatches.length,
-                          separatorBuilder: (context, index) => const SizedBox(height: 14),
+                          separatorBuilder: (context, index) => const SizedBox(height: 24),
                           itemBuilder: (context, index) => _buildMatchCard(match: AppData.upcomingMatches[index]),
                         ),
                       ),
@@ -208,24 +208,27 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Stack(
-                    alignment: .topLeft,
-                    children: List.generate(4, (index){
-                      String imageUrl = AppData.imageUrls[index];
-                      return  index == 0 ? _buildUserImageItemWidget(imageUrl) :  Positioned(
-                          left: index * 30,
-                          child: index == 3 ? _buildMoreWidget() : _buildUserImageItemWidget(imageUrl) );
-                    })
+          SizedBox(
+            height: 45,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Stack(
+                      alignment: .topLeft,
+                      children: List.generate(4, (index){
+                        String imageUrl = AppData.imageUrls[index];
+                        return  index == 0 ? _buildUserImageItemWidget(imageUrl) :  Positioned(
+                            left: index * 30,
+                            child: index == 3 ? _buildMoreWidget() : _buildUserImageItemWidget(imageUrl) );
+                      })
+                  ),
                 ),
-              ),
-              Align(
-                alignment: .centerRight,
-                child: _buildBookButton(label: match.actionLabel),
-              ),
-            ],
+                Align(
+                  alignment: .centerRight,
+                  child: _buildBookButton(label: match.actionLabel),
+                ),
+              ],
+            ),
           )
 
 
